@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet KKCirStatisticalFigureView *cirStatisticalFigureView;
 @property (weak, nonatomic) IBOutlet UISlider *speedSlider;
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UIButton *stopButton;
 
 @end
 
@@ -49,39 +49,37 @@
 #pragma mark - Data
 
 -(void)testData{
-    if (!testDataTimer) {
-        testDataTimer = [NSTimer kkScheduledTimerWithTimeInterval:speed block:^{
-            
-            NSArray *percentageArray = [self randomPerentageArrayWithStyle:testStyle];
-            CGFloat startAngle = [self randomAngle];
-            BOOL isClockwise = arc4random() % 2;
-            
-            self.cirStatisticalFigureView.percentageArray = percentageArray;
-            self.cirStatisticalFigureView.startAngle = startAngle;
-            self.cirStatisticalFigureView.isClockwise = isClockwise;
-            
-            NSMutableString *percentageArrayMS = [NSMutableString string];
-            for (NSInteger i = 0; i < percentageArray.count; i++) {
-                if (!i) {
-                    [percentageArrayMS appendString:@"@["];
-                }
-                NSString *percentageString = [NSString stringWithFormat:@"@%ld", [percentageArray[i] integerValue]];
-                [percentageArrayMS appendString:percentageString];
-                if (i == percentageArray.count - 1) {
-                    [percentageArrayMS appendString:@"];"];
-                }else{
-                    [percentageArrayMS appendString:@", "];
-                }
+    testDataTimer = [NSTimer kkScheduledTimerWithTimeInterval:speed block:^{
+        
+        NSArray *percentageArray = [self randomPerentageArrayWithStyle:testStyle];
+        CGFloat startAngle = [self randomAngle];
+        BOOL isClockwise = arc4random() % 2;
+        
+        self.cirStatisticalFigureView.percentageArray = percentageArray;
+        self.cirStatisticalFigureView.startAngle = startAngle;
+        self.cirStatisticalFigureView.isClockwise = isClockwise;
+        
+        NSMutableString *percentageArrayMS = [NSMutableString string];
+        for (NSInteger i = 0; i < percentageArray.count; i++) {
+            if (!i) {
+                [percentageArrayMS appendString:@"@["];
             }
-            
-//            NSLog(@"%f %@", startAngle, isClockwise ? @"YES" : @"NO");
-//            NSLog(@"%@", percentageArrayMS);
-//            
-//            NSLog(@"------------------------------------------------------ ");
-        } repeats:YES];
-        [testDataTimer fire];
-        [[NSRunLoop currentRunLoop] run];
-    }
+            NSString *percentageString = [NSString stringWithFormat:@"@%ld", [percentageArray[i] integerValue]];
+            [percentageArrayMS appendString:percentageString];
+            if (i == percentageArray.count - 1) {
+                [percentageArrayMS appendString:@"];"];
+            }else{
+                [percentageArrayMS appendString:@", "];
+            }
+        }
+        
+        NSLog(@"%f %@", startAngle, isClockwise ? @"YES" : @"NO");
+        NSLog(@"%@", percentageArrayMS);
+        
+        NSLog(@"------------------------------------------------------ ");
+    } repeats:YES];
+    [testDataTimer fire];
+    [[NSRunLoop currentRunLoop] run];
 }
 
 #pragma mark - Button
@@ -104,10 +102,10 @@
         case 1:{
             [testDataTimer setFireDate:[NSDate distantFuture]];
             UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil
-                                                     delegate:self
-                                            cancelButtonTitle:@"取消"
-                                       destructiveButtonTitle:nil
-                                            otherButtonTitles:nil];
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"取消"
+                                                      destructiveButtonTitle:nil
+                                                           otherButtonTitles:nil];
             actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
             for (NSInteger i = 0; i <= 6; i++) {
                 [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"样式 %ld", (long)i]];
@@ -124,7 +122,7 @@
 
 - (IBAction)sliderTouchDown:(UISlider *)sender {
     isStopTestDataTimer = NO;
-    [self.startButton setTitle:@"暂停" forState:UIControlStateNormal];
+    [self.stopButton setTitle:@"暂停" forState:UIControlStateNormal];
 }
 
 - (IBAction)sliderChanged:(UISlider *)sender {
@@ -152,7 +150,6 @@
 
 -(NSArray *)randomPerentageArrayWithStyle:(NSInteger)style{
     NSMutableArray *percentageMArray = [NSMutableArray array];
-//    NSInteger percentageTotalNumber = 0;
     switch (style) {
         case 0:{
             for (NSInteger i = 0; i < 5; i++) {
@@ -230,7 +227,6 @@
         default:
             break;
     }
-    
     return percentageMArray;
 }
 

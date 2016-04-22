@@ -54,7 +54,7 @@
                                 <rect key="frame" x="42" y="308" width="270" height="31"/>
                                 <connections>
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="MhB-MN-AGu"/>
-                                    <action selector="sliderTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="9G0-Oh-2xy"/>
+                                    <action selector="sliderTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="qoz-0O-jNg"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCm-oH-wiw">
@@ -86,7 +86,7 @@
                     <connections>
                         <outlet property="cirStatisticalFigureView" destination="HY4-Kd-m8s" id="PSP-CA-OgM"/>
                         <outlet property="speedSlider" destination="9cu-hO-SMg" id="9NZ-oy-Let"/>
-                        <outlet property="startButton" destination="x5o-s6-bkx" id="clL-zg-7uS"/>
+                        <outlet property="stopButton" destination="x5o-s6-bkx" id="YFT-5R-meF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
