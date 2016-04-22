@@ -571,17 +571,11 @@
             [labelsLinkPathMArray addObject:labelsLinkPath];
         }
         
-        if (!drawPercentagesArcPath &&
-            !drawPercentagesLinkPoint &&
-            !drawLabelsLinkPoint &&
-            !drawLabelsFrameArray &&
-            !drawLabelsLinkPath) {
-            [self drawPercentagesArcPath:nil
-            withDrawPercentagesLinkPoint:nil
-                 withDrawLabelsLinkPoint:nil
-                     withDrawLabelsFrame:nil
-                  withDrawLabelsLinkPath:nil];
-        }
+        [self drawPercentagesArcPath:drawPercentagesArcPath
+        withDrawPercentagesLinkPoint:drawPercentagesLinkPoint
+             withDrawLabelsLinkPoint:drawLabelsLinkPoint
+                 withDrawLabelsFrame:drawLabelsFrameArray
+              withDrawLabelsLinkPath:drawLabelsLinkPath];
         drawPercentagesArcPath(percentagesArcPathMArray);
         drawPercentagesLinkPoint(percentagesLinkPointMArray);
         drawLabelsLinkPoint(labelsLinkPointMArray);
