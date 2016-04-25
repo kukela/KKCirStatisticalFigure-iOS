@@ -1,4 +1,4 @@
-# CirStatisticalFigure-iOS
+# KKCirStatisticalFigure-iOS
 用于制作圆形统计图
 
 ![image](https://github.com/kukela/CirStatisticalFigure-iOS/raw/master/img/2016_4_22_12.53.05.png)
