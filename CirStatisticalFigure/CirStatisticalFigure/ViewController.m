@@ -49,37 +49,38 @@
 #pragma mark - Data
 
 -(void)testData{
-    testDataTimer = [NSTimer kkScheduledTimerWithTimeInterval:speed block:^{
-        
-        NSArray *percentageArray = [self randomPerentageArrayWithStyle:testStyle];
-        CGFloat startAngle = [self randomAngle];
-        BOOL isClockwise = arc4random() % 2;
-        
-        self.cirStatisticalFigureView.percentageArray = percentageArray;
-        self.cirStatisticalFigureView.startAngle = startAngle;
-        self.cirStatisticalFigureView.isClockwise = isClockwise;
-        
-        NSMutableString *percentageArrayMS = [NSMutableString string];
-        for (NSInteger i = 0; i < percentageArray.count; i++) {
-            if (!i) {
-                [percentageArrayMS appendString:@"@["];
+    if (!testDataTimer) {
+        testDataTimer = [NSTimer kkScheduledTimerWithTimeInterval:speed block:^{
+            NSArray *percentageArray = [self randomPerentageArrayWithStyle:testStyle];
+            CGFloat startAngle = [self randomAngle];
+            BOOL isClockwise = arc4random() % 2;
+            
+            self.cirStatisticalFigureView.percentageArray = percentageArray;
+            self.cirStatisticalFigureView.startAngle = startAngle;
+            self.cirStatisticalFigureView.isClockwise = isClockwise;
+            
+            NSMutableString *percentageArrayMS = [NSMutableString string];
+            for (NSInteger i = 0; i < percentageArray.count; i++) {
+                if (!i) {
+                    [percentageArrayMS appendString:@"@["];
+                }
+                NSString *percentageString = [NSString stringWithFormat:@"@%ld", [percentageArray[i] integerValue]];
+                [percentageArrayMS appendString:percentageString];
+                if (i == percentageArray.count - 1) {
+                    [percentageArrayMS appendString:@"];"];
+                }else{
+                    [percentageArrayMS appendString:@", "];
+                }
             }
-            NSString *percentageString = [NSString stringWithFormat:@"@%ld", [percentageArray[i] integerValue]];
-            [percentageArrayMS appendString:percentageString];
-            if (i == percentageArray.count - 1) {
-                [percentageArrayMS appendString:@"];"];
-            }else{
-                [percentageArrayMS appendString:@", "];
-            }
-        }
-        
-        NSLog(@"%f %@", startAngle, isClockwise ? @"YES" : @"NO");
-        NSLog(@"%@", percentageArrayMS);
-        
-        NSLog(@"------------------------------------------------------ ");
-    } repeats:YES];
-    [testDataTimer fire];
-    [[NSRunLoop currentRunLoop] run];
+            
+            NSLog(@"%f %@", startAngle, isClockwise ? @"YES" : @"NO");
+            NSLog(@"%@", percentageArrayMS);
+            
+            NSLog(@"------------------------------------------------------ ");
+        } repeats:YES];
+        [testDataTimer fire];
+        [[NSRunLoop currentRunLoop] run];
+    }
 }
 
 #pragma mark - Button
